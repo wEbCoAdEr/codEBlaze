@@ -34,7 +34,8 @@
  * @link	https://codeblaze.skarbol.com
  * @since	Version 1.0
  */
-class codeblaze {
+class codeblaze
+{
 
     protected $controller;
     protected $default_controller;
@@ -46,8 +47,11 @@ class codeblaze {
     private $controller_not_found = true;
     private $action_not_found = true;
 
-    public function __construct(array $routes, string $default_controller = "") {
-        $this->default_controller = $default_controller;
+    public function __construct()
+    {
+        global $systemConfig;
+        global $routes;
+        $this->default_controller = $systemConfig['DEFAULT_CONTROLLER'];
         $this->routesData = $routes;
         $this->processRequest();
         if (array_key_exists($this->controllerAndAction, $this->routesData)) {
@@ -56,7 +60,8 @@ class codeblaze {
         $this->processController();
     }
 
-    protected function processRequest($initRequest = "") {
+    protected function processRequest($initRequest = "")
+    {
         $request = $initRequest;
         if (empty($initRequest)) {
             $request = trim($_SERVER['REQUEST_URI'], '/');
@@ -78,7 +83,8 @@ class codeblaze {
         }
     }
 
-    protected function processController() {
+    protected function processController()
+    {
         if (!empty($this->controllerAndAction)) {
             if (file_exists(CONTROLLER . $this->controller . '.php')) {
                 $this->controller = new $this->controller();
@@ -105,5 +111,4 @@ class codeblaze {
             }
         }
     }
-
 }

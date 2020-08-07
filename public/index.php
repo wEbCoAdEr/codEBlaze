@@ -114,4 +114,4 @@ set_include_path(get_include_path() . PATH_SEPARATOR . implode(PATH_SEPARATOR, $
 
 spl_autoload_register();
 
-new codeblaze($routes, $systemConfig['DEFAULT_CONTROLLER']);
+new codeblaze();

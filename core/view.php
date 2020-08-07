@@ -34,18 +34,20 @@
  * @link	https://codeblaze.skarbol.com
  * @since	Version 1.0
  */
-class view extends controller {
-
+class view extends controller
+{
     protected $view_file;
     protected $view_data;
 
-    public function __construct($view_file, $view_data) {
+    public function __construct($view_file, $view_data)
+    {
         $this->view_file = $view_file;
         $this->view_data = $view_data;
         $this->renderView();
     }
 
-    public function renderView() {
+    public function renderView()
+    {
         $this->view_file = VIEW . $this->view_file . '.phtml';
         if ($this->view_file) {
             if (!empty($this->view_data)) {
@@ -54,5 +56,4 @@ class view extends controller {
             include $this->view_file;
         }
     }
-
 }

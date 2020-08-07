@@ -5,7 +5,7 @@ class default_controller extends controller
 
     public function index()
     {
-        $data['home_data'] = $this->default_model->getHomeData();
+        $data['name'] = $this->default_model->getName();
         $this->load->view('default', $data);
     }
 }
