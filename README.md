@@ -3,8 +3,8 @@ codEBlaze is an open-source PHP web application development MVC framework. This 
 
 # Installation
 1) Clone the repository by running the following command<br/>
-git clone https://github.com/wEbCoAdEr/codEBlaze.git
-<br/>
+git clone https://github.com/wEbCoAdEr/codEBlaze.git<br/>
+
 2) After cloning the repository a folder named codEBlaze will be created and that is the folder of codEBlaze.<br/>
 There you will get three folders listed below<br/>
 app <br/>
