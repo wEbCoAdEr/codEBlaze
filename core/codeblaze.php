@@ -44,6 +44,7 @@ class codeblaze
     protected $controllerAndAction;
     protected $prams = [];
     protected $routesData = [];
+    private $scriptDir;
     private $controller_not_found = true;
     private $action_not_found = true;
 
@@ -51,6 +52,7 @@ class codeblaze
     {
         global $systemConfig;
         global $routes;
+        $this->scriptDir = dirname($_SERVER['SCRIPT_NAME']);
         $this->default_controller = $systemConfig['DEFAULT_CONTROLLER'];
         $this->routesData = $routes;
         $this->processRequest();
@@ -85,7 +87,7 @@ class codeblaze
 
     protected function processController()
     {
-        if (!empty($this->controllerAndAction)) {
+        if (!empty($this->controllerAndAction) AND $this->controllerAndAction != trim($this->scriptDir, '/')) {
             if (file_exists(CONTROLLER . $this->controller . '.php')) {
                 $this->controller = new $this->controller();
                 $this->controller_not_found = false;

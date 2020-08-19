@@ -36,10 +36,14 @@
  */
 if (!function_exists('systemURL')) {
 
-    function systemURL() {
-        $url = "http://" . $_SERVER['HTTP_HOST'];
-        $url .= dirname($_SERVER['SCRIPT_NAME']);
-        return $url;
-    }
+	function systemURL() {
+		$url = "http://" . $_SERVER['HTTP_HOST'];
+		if(dirname($_SERVER['SCRIPT_NAME']) != '/'){
+			$url .= dirname($_SERVER['SCRIPT_NAME']) . '/';
+		}else{
+			$url .= '/';
+		}
+		return $url;
+	}
 
 }
