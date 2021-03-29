@@ -27,25 +27,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  *
- * @package	codEBlaze
- * @author	wEbCoAdEr
- * @copyright	Copyright (c) 2020, Skarbol (https://skarbol.com/)
- * @license	https://opensource.org/licenses/MIT	MIT License
- * @link	https://codeblaze.skarbol.com
- * @since	Version 1.0
+ * @package    codEBlaze
+ * @author    wEbCoAdEr
+ * @copyright    Copyright (c) 2020, Skarbol (https://skarbol.com/)
+ * @license    https://opensource.org/licenses/MIT	MIT License
+ * @link    https://codeblaze.skarbol.com
+ * @since    Version 1.0
  */
-class Controller {
+class Controller
+{
 
     private static $instance;
     public $load;
 
-    public function __construct() {
+    public function __construct()
+    {
         self::$instance = $this;
         global $autoloadConfig;
         $this->load = new Loader($autoloadConfig);
     }
 
-    public static function get_instance() {
+    public static function get_instance()
+    {
         return self::$instance;
     }
 

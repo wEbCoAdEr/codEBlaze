@@ -27,23 +27,50 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  *
- * @package	codEBlaze
- * @author	wEbCoAdEr
- * @copyright	Copyright (c) 2020, Skarbol (https://skarbol.com/)
- * @license	https://opensource.org/licenses/MIT	MIT License
- * @link	https://codeblaze.skarbol.com
- * @since	Version 1.0
+ * @package    codEBlaze
+ * @author    wEbCoAdEr
+ * @copyright    Copyright (c) 2020, Skarbol (https://skarbol.com/)
+ * @license    https://opensource.org/licenses/MIT	MIT License
+ * @link    https://codeblaze.skarbol.com
+ * @since    Version 1.0
  */
+
 if (!function_exists('systemURL')) {
 
-	function systemURL() {
-		$url = "http://" . $_SERVER['HTTP_HOST'];
-		if(dirname($_SERVER['SCRIPT_NAME']) != '/'){
-			$url .= dirname($_SERVER['SCRIPT_NAME']) . '/';
-		}else{
-			$url .= '/';
-		}
-		return $url;
-	}
+    function systemURL()
+    {
+        $url = "http://" . $_SERVER['HTTP_HOST'];
+        if (dirname($_SERVER['SCRIPT_NAME']) != '/') {
+            $url .= dirname($_SERVER['SCRIPT_NAME']) . '/';
+        } else {
+            $url .= '/';
+        }
+        return $url;
+    }
+
+}
+
+if (!function_exists('enableMaintenance')) {
+
+    function enableMaintenance()
+    {
+
+        if (!file_exists(SYSTEM_ROOT . '.maintenance')) {
+            $file = fopen(SYSTEM_ROOT . '.maintenance', "w");
+            fclose($file);
+        }
+
+    }
+
+}
+
+if (!function_exists('disableMaintenance')) {
+
+    function disableMaintenance()
+    {
+        if (file_exists(SYSTEM_ROOT . '.maintenance')) {
+            unlink(SYSTEM_ROOT . '.maintenance');
+        }
+    }
 
 }

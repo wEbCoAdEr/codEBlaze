@@ -59,6 +59,17 @@ By default the default controller will handle the request of your project's root
 want to change the default controller then set your desired controller name in $systemConfig['DEFAULT_CONTROLLER']
 */
 $systemConfig['DEFAULT_CONTROLLER'] = 'default_controller';
+
+/*
+$systemConfig['MAINTENANCE_EXCLUDE_CONTROLLERS'] contains the routes list which will be excluded from the
+maintenance mode if maintenance mode is enabled
+example: $systemConfig['MAINTENANCE_EXCLUDE_CONTROLLERS'] = array('admin/login', 'admin/settings', 'admin');
+If the config is set like the above example then the following routes admin/login, admin/login & admin will
+be excluded from maintenance mode. It receives actual controller/method route instead of custom routes config
+keys.
+*/
+$systemConfig['MAINTENANCE_EXCLUDE_ROUTES'] = array();
+
 #--------End System Configurations--------#
 
 
@@ -84,9 +95,9 @@ load a library where you need to pass parameters for the class initialization. T
 is the value of the each associative array keys. 
 Example:
 $autoloadConfig['LIBRARIES'] = array(
-    'database' => array("database", "admin", "wpassword")
+    'database' => array("database", "admin", "password")
 );
-Here we are loading a library named database. The library class recives 3 parameters or the class constructor requires 3 parameters for 
+Here we are loading a library named database. The library class receives 3 parameters or the class constructor requires 3 parameters for
 initializing the class. we have provided the 3 parameters value in an array as an associative array key value where the key is the
 name of the library that we are loading.
 */
@@ -108,3 +119,5 @@ $dbConfig['db_host'] = 'localhost'; //Your database host. Example: $config['db_h
 $dbConfig['db_user'] = 'root'; //Your database username. Example: $config['db_user'] = 'root';
 $dbConfig['db_pass'] = ''; //Your database user password. Example: $config['db_pass'] = 'password';
 $dbConfig['db_name'] = ''; //Your database name. Example: $config['db_name'] = 'testdatabase';
+
+

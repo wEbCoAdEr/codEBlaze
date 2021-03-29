@@ -27,38 +27,42 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  *
- * @package	codEBlaze
- * @author	wEbCoAdEr
- * @copyright	Copyright (c) 2020, Skarbol (https://skarbol.com/)
- * @license	https://opensource.org/licenses/MIT	MIT License
- * @link	https://codeblaze.skarbol.com
- * @since	Version 1.0
+ * @package    codEBlaze
+ * @author    wEbCoAdEr
+ * @copyright    Copyright (c) 2020, Skarbol (https://skarbol.com/)
+ * @license    https://opensource.org/licenses/MIT	MIT License
+ * @link    https://codeblaze.skarbol.com
+ * @since    Version 1.0
  */
-class loader {
+class loader
+{
 
     protected $view;
     protected $autoLoadData;
 
-    public function __construct($autoloadConfig) {
+    public function __construct($autoloadConfig)
+    {
         $this->autoLoadData = $autoloadConfig;
         $this->autoLoadModels($this->autoLoadData['MODELS']);
         $this->autoLoadLibraries($this->autoLoadData['LIBRARIES']);
         $this->autoLoadHelpers($this->autoLoadData['HELPERS']);
     }
 
-    public function view($view, $data = []) {
+    public function view($view, $data = [])
+    {
         $this->view = new view($view, $data);
         return $this->view;
     }
 
-    public function model($model) {
+    public function model($model)
+    {
         $CT = Controller::get_instance();
         $model_name = $model;
         $model_path = MODEL . $model . '.php';
         if (file_exists($model_path)) {
             if (isset($CT->$model_name)) {
                 throw new RuntimeException(
-                        'The model "' . $model_name . '" is already loaded'
+                    'The model "' . $model_name . '" is already loaded'
                 );
                 return false;
             }
@@ -67,14 +71,15 @@ class loader {
         }
     }
 
-    public function library($library, array $parameters = []) {
+    public function library($library, array $parameters = [])
+    {
         $CT = Controller::get_instance();
         $library_name = $library;
         $library_path = LIBRARY . $library_name . '.php';
         if (file_exists($library_path)) {
             if (isset($CT->$library_name)) {
                 throw new RuntimeException(
-                        'The library "' . $library_name . '" is already loaded'
+                    'The library "' . $library_name . '" is already loaded'
                 );
                 return false;
             }
@@ -84,7 +89,8 @@ class loader {
         }
     }
 
-    public function helper($helper) {
+    public function helper($helper)
+    {
         $helper_name = $helper;
         $helper_path = HELPER . $helper_name . '.php';
         if (file_exists($helper_path)) {
@@ -92,19 +98,22 @@ class loader {
         }
     }
 
-    private function autoLoadModels($autoLoadModels) {
+    private function autoLoadModels($autoLoadModels)
+    {
         foreach ($autoLoadModels as $model) :
             $this->model($model);
         endforeach;
     }
 
-    private function autoLoadLibraries($autoLoadLibraries) {
+    private function autoLoadLibraries($autoLoadLibraries)
+    {
         foreach ($autoLoadLibraries as $library => $para) :
             $this->library($library, $para);
         endforeach;
     }
 
-    private function autoLoadHelpers($autoLoadHelpers) {
+    private function autoLoadHelpers($autoLoadHelpers)
+    {
         foreach ($autoLoadHelpers as $helper) :
             $this->helper($helper);
         endforeach;
