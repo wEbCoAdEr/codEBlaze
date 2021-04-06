@@ -76,7 +76,10 @@ class codeblaze
         $request = $initRequest;
 
         if (empty($initRequest)) {
+
             $request = trim($_SERVER['REQUEST_URI'], '/');
+            $request = explode('?', $request)[0];
+
         }
 
         if (!empty($request)) {
@@ -85,7 +88,7 @@ class codeblaze
 
             if (isset($url[0])) {
 
-                $this->controller = $url[0] . '_controller';
+                $this->controller = $url[0];
                 $this->controllerAndAction = $url[0];
 
             }
