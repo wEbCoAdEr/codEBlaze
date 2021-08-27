@@ -16,7 +16,7 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in
+ * The above copyright notice and this permission notice shall be require_onced in
  * all copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -60,14 +60,10 @@ class loader
         $model_name = $model;
         $model_path = MODEL . $model . '.php';
         if (file_exists($model_path)) {
-            if (isset($CT->$model_name)) {
-                throw new RuntimeException(
-                    'The model "' . $model_name . '" is already loaded'
-                );
-                return false;
+            if (!isset($CT->$model_name)) {
+                require_once $model_path;
+                $CT->$model_name = new $model_name();
             }
-            include $model_path;
-            $CT->$model_name = new $model_name();
         }
     }
 
@@ -77,15 +73,12 @@ class loader
         $library_name = $library;
         $library_path = LIBRARY . $library_name . '.php';
         if (file_exists($library_path)) {
-            if (isset($CT->$library_name)) {
-                throw new RuntimeException(
-                    'The library "' . $library_name . '" is already loaded'
-                );
-                return false;
+            if (!isset($CT->$library_name)) {
+                require_once $library_path;
+                $library_class = new ReflectionClass($library_name);
+                $CT->$library_name = $library_class->newInstanceArgs($parameters);
             }
-            include $library_path;
-            $library_class = new ReflectionClass($library_name);
-            $CT->$library_name = $library_class->newInstanceArgs($parameters);
+
         }
     }
 
@@ -94,7 +87,7 @@ class loader
         $helper_name = $helper;
         $helper_path = HELPER . $helper_name . '.php';
         if (file_exists($helper_path)) {
-            include_once($helper_path);
+            require_once($helper_path);
         }
     }
 

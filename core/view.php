@@ -41,6 +41,7 @@ class view extends controller
 
     public function __construct($view_file, $view_data)
     {
+        parent::__construct();
         $this->view_file = $view_file;
         $this->view_data = $view_data;
         $this->renderView();
@@ -49,11 +50,11 @@ class view extends controller
     public function renderView()
     {
         $this->view_file = VIEW . $this->view_file . '.phtml';
-        if ($this->view_file) {
+        if (file_exists($this->view_file)) {
             if (!empty($this->view_data)) {
                 extract($this->view_data);
             }
-            include $this->view_file;
+            require_once $this->view_file;
         }
     }
 }

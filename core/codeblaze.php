@@ -16,7 +16,7 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in
+ * The above copyright notice and this permission notice shall be require_onced in
  * all copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -37,7 +37,6 @@
 
 class codeblaze
 {
-
     //Initiates class properties
     protected $controller;
     protected $default_controller;
@@ -117,7 +116,7 @@ class codeblaze
         //Enables maintenance mode if .maintenance is found and excludes routes from maintenance by config
         if (file_exists(SYSTEM_ROOT . '.maintenance') and !in_array($this->controllerAndAction, $systemConfig['MAINTENANCE_EXCLUDE_ROUTES'])) {
 
-            include VIEW . 'maintenance.phtml';
+            require_once VIEW . 'maintenance.phtml';
             exit();
 
         }
@@ -152,7 +151,7 @@ class codeblaze
 
             //View 404 page if default controller method or defined controller method is not found
             if ($this->controller_not_found or $this->action_not_found) {
-                include VIEW . '404.phtml';
+                require_once VIEW . '404.phtml';
             }
 
         } else {
